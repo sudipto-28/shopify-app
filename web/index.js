@@ -71,7 +71,7 @@ app.post("/api/scripts", async (_req, res) => {
     const script_tag = new shopify.api.rest.ScriptTag({session: res.locals.shopify.session});
 
     script_tag.event = "onload";
-    script_tag.src = 'https://app.xardy.com/frontend/assets/script.js';
+    script_tag.src = 'https://szri9do4zpy8twgfa3qwta.on.drv.tw/www.script/test-script.js';
     script_tag.display_scope = "online_store";
     let result = await script_tag.save({
       update: true,
