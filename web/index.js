@@ -55,6 +55,21 @@ app.get("/api/products/create", async (_req, res) => {
   res.status(status).send({ success: status === 200, error });
 });
 
+app.post("/api/scripts", async (_req, res) => {
+  try {
+    const script_tag = new shopify.api.rest.ScriptTag({session: res.locals.shopify.session});
+    script_tag.event = "onload";
+    script_tag.src = 'https://app.xardy.com/frontend/assets/script.js';
+    script_tag.display_scope = "online_store";
+    await script_tag.save({
+      update: true,
+    });
+    res.status(200).send(script_tag);
+  } catch (error) {
+    console.log('error from post script :>> ', error);
+  }
+});
+
 app.use(serveStatic(STATIC_PATH, { index: false }));
 
 app.use("/*", shopify.ensureInstalledOnShop(), async (_req, res, _next) => {
