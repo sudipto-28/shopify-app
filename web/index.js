@@ -64,8 +64,6 @@ app.get("/api/scripts/all", async (_req, res) => {
   } catch (error) {
     console.log('error from get scripts :>> ', error);
   }
-
-
 });
 
 app.post("/api/scripts", async (_req, res) => {
@@ -73,11 +71,12 @@ app.post("/api/scripts", async (_req, res) => {
     const script_tag = new shopify.api.rest.ScriptTag({session: res.locals.shopify.session});
 
     script_tag.event = "onload";
-    script_tag.src = 'https://app.xardy.com/script.js';
+    script_tag.src = 'https://app.xardy.com/frontend/assets/script.js';
     script_tag.display_scope = "online_store";
     let result = await script_tag.save({
       update: true,
     });
+    console.log('result', result)
     console.log('res from script api', res.locals)
     res.status(200).send(script_tag);
   } catch (error) {
