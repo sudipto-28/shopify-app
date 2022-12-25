@@ -41,6 +41,12 @@ export function ProductsCard() {
       headers: { "Content-Type": "application/json" }
     })
     console.log('res', res)
+
+    const result = await fetch("/api/scripts/all", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" }
+    })
+    console.log('result', result)
     if (response.ok) {
       await refetchProductCount();
       setToastProps({ content: "5 products created!" });
